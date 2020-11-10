@@ -2,6 +2,12 @@
   @article = Article.new
   @article.title = Faker::Creature::Animal.name
   @article.content = Faker::Lorem.paragraphs.join
-  @article.picture = "https://images.unsplash.com/photo-1534534502714-2828e7c540d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE4MTU1MX0&utm_source=alices_terrific_client_app&utm_medium=referral&utm_campaign=api-credit"
+  random_index = rand(0..3)
+  search_results = Unsplash::Photo.search(@article.title)
+  if search_results[random_index]
+    @article.picture = search_results[random_index].urls['regular']
+  else
+    @article.picture = Unsplash::Photo.search('dinosaure')[rand(0..2)].urls['regular']
+  end
   @article.save
 end

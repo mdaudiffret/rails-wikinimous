@@ -8,8 +8,13 @@ class ApplicationController < ActionController::Base
 
   def create
     @article = Article.new(strong_params)
+    random_index = rand(0..3)
     search_results = Unsplash::Photo.search(@article.title)
-    @article.picture = search_results[1].urls['regular']
+    if search_results[random_index]
+      @article.picture = search_results[random_index].urls['regular']
+    else
+      @article.picture = Unsplash::Photo.search('dinosaure')[rand(0..2)].urls['regular']
+    end
     @article.save
     redirect_to article_path(@article)
   end
