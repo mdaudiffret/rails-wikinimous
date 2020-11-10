@@ -1,0 +1,17 @@
+<div class="card text-center">
+  <div class="card-header">
+    Article
+  </div>
+  <div class="card-body">
+    <div>
+      <%= image_tag(@article.picture, class: "image", height: '200px') %>
+    </div>
+    <h5 class="card-title"><%= @article.title %></h5>
+    <p class="card-text"><%= @article.content %></p>
+    <%= link_to("back to list", articles_path, class: "btn btn-outline-secondary btn-sm") %>
+    <%= link_to("edit", edit_article_path(@article), class: "btn btn-outline-primary btn-sm") %>
+  </div>
+  <div class="card-footer text-muted">
+    <%= @article.created_at %>
+  </div>
+</div>
